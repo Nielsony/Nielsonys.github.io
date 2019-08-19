@@ -55,20 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="代码点缀星空">
-<meta name="keywords" content="MarkDown">
+  <meta name="description" content="LINUX系统UDP丢包问题分析和解决由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。网络丢包首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MarkDown 新手指南">
-<meta property="og:url" content="http://www.nielsonyblog.com/2019/08/13/MarkDown-Use-Guide/index.html">
+<meta property="og:title" content="UDP丢包问题.md">
+<meta property="og:url" content="http://www.nielsonyblog.com/2019/08/19/UDP丢包问题-md/index.html">
 <meta property="og:site_name" content="Nielsony博客">
-<meta property="og:description" content="代码点缀星空">
+<meta property="og:description" content="LINUX系统UDP丢包问题分析和解决由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。网络丢包首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-14T08:03:19.535Z">
+<meta property="og:updated_time" content="2019-08-19T08:55:10.182Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MarkDown 新手指南">
-<meta name="twitter:description" content="代码点缀星空">
+<meta name="twitter:title" content="UDP丢包问题.md">
+<meta name="twitter:description" content="LINUX系统UDP丢包问题分析和解决由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。网络丢包首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面">
   <link rel="alternate" href="/atom.xml" title="Nielsony博客" type="application/atom+xml">
-  <link rel="canonical" href="http://www.nielsonyblog.com/2019/08/13/MarkDown-Use-Guide/">
+  <link rel="canonical" href="http://www.nielsonyblog.com/2019/08/19/UDP丢包问题-md/">
 
 
 <script id="page-configurations">
@@ -82,7 +81,7 @@
   };
 </script>
 
-  <title>MarkDown 新手指南 | Nielsony博客</title>
+  <title>UDP丢包问题.md | Nielsony博客</title>
   
 
 
@@ -263,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nielsonyblog.com/2019/08/13/MarkDown-Use-Guide/">
+    <link itemprop="mainEntityOfPage" href="http://www.nielsonyblog.com/2019/08/19/UDP丢包问题-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nielsony">
@@ -277,7 +276,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">MarkDown 新手指南
+          <h1 class="post-title" itemprop="name headline">UDP丢包问题.md
 
             
           </h1>
@@ -294,25 +293,12 @@
                 
               
 
-              <time title="创建时间：2019-08-14 06:12:19 / 修改时间：16:03:19" itemprop="dateCreated datePublished" datetime="2019-08-14T06:12:19+08:00">2019-08-14</time>
+              <time title="创建时间：2019-08-19 08:52:22 / 修改时间：16:55:10" itemprop="dateCreated datePublished" datetime="2019-08-19T08:52:22+08:00">2019-08-19</time>
             </span>
           
             
 
             
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MarkDown/" itemprop="url" rel="index"><span itemprop="name">MarkDown</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -326,7 +312,116 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="LINUX系统UDP丢包问题分析和解决"><a href="#LINUX系统UDP丢包问题分析和解决" class="headerlink" title="LINUX系统UDP丢包问题分析和解决"></a>LINUX系统UDP丢包问题分析和解决</h1><hr><br><p>由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。</p><h2 id="网络丢包"><a href="#网络丢包" class="headerlink" title="网络丢包"></a>网络丢包</h2><p>首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面，可以查看到2s/10s/40s的平均带宽使用，发现网络带宽没有达到瓶颈。</p><a id="more"></a>
+
+最近的工作项目中使用UDP服务端提供高并发访问，压测时，4核CPU使用率25%左右，内存占用稳定不高，通过wireshark抓包，发现请求和返回都有丢失，怀疑是网卡丢包，借鉴了很多文章的解决办法，总结出这篇文章，供参考。
+
+
+
+<h2 id="网卡丢包"><a href="#网卡丢包" class="headerlink" title="网卡丢包"></a>网卡丢包</h2><p>因为报文首先通过网络发送到网卡，所以首先检查网卡是否丢包。通过ifconfig命令可以查看到网卡的统计信息。</p>
+<pre><code>[root@gjddw04 ~]# ifconfig
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 2000
+    inet 192.168.130.5  netmask 255.255.255.0  broadcast 192.168.130.255
+    inet6 fe80::f816:3eff:fe31:a1e4  prefixlen 64  scopeid 0x20&lt;link&gt;
+    ether fa:16:3e:31:a1:e4  txqueuelen 1000  (Ethernet)
+    RX packets 3217747692  bytes 1390946948322 (1.2 TiB)
+    RX errors 0  dropped 0  overruns 0  frame 0
+    TX packets 2266317087  bytes 912627924213 (849.9 GiB)
+    TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+    inet 127.0.0.1  netmask 255.0.0.0
+    loop  txqueuelen 0  (Local Loopback)
+    RX packets 14001198  bytes 1745660180 (1.6 GiB)
+    RX errors 0  dropped 0  overruns 0  frame 0
+    TX packets 14001198  bytes 1745660180 (1.6 GiB)
+    TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre><p>查看对应网卡的统计信息，其中：</p>
+<ul>
+<li>RX 表示收包</li>
+<li>RX errors 表示收包错误，包括 too-long-frames 错误，Ring Buffer 溢出错误，crc 校验错误，帧同步错误，fifo overruns 以及 missed pkg 等等。</li>
+<li>RX dropped 表示数据包进入到ring buffer，由于内存不够等原因，在copy到内存过程中被丢弃</li>
+<li>RX overruns 表示fifo的overruns，由于 Ring Buffer(aka Driver Queue) 传输的 IO 大于 kernel 能够处理的 IO 导致</li>
+<li>RX frame 表示 misaligned 的 frames</li>
+</ul>
+<p>我这里查看网卡没有丢包，如果网卡丢包数据都不为0，可以通过ethtool查看丢包具体分布，定位丢包原因。</p>
+<h2 id="UDP协议丢包"><a href="#UDP协议丢包" class="headerlink" title="UDP协议丢包"></a>UDP协议丢包</h2><p>网卡没有丢包产生，继续看UDP协议是否有丢包，使用netstat -s -u可以查看UDP协议的统计信息。</p>
+<pre><code>[root@gjddw04 ~]# netstat -s -u
+IcmpMsg:
+    InType0: 3
+    InType3: 2368
+    InType8: 3
+    InType11: 5
+    OutType0: 3
+    OutType3: 2070
+    OutType8: 3
+Udp:
+    989343462 packets received
+    917553 packets to unknown port received.
+    181766859 packet receive errors
+    1031092689 packets sent
+    0 receive buffer errors
+    6334570 send buffer errors
+UdpLite:
+    IpExt:
+    InNoRoutes: 5798
+    InMcastPkts: 111
+    OutMcastPkts: 111
+    InBcastPkts: 527
+    InOctets: 1347741084788
+    OutOctets: 886707488146
+    InMcastOctets: 4440
+    OutMcastOctets: 4440
+    InBcastOctets: 41736
+    InNoECTPkts: 3232054948</code></pre><p>通过查看，发现 181766859 packet receive errors 数字一直增加，数据包接收错误的主要原因：</p>
+<ul>
+<li>udp包头损坏或校验和问题</li>
+<li>应用程序或内核端的数据包接收缓冲区问题</li>
+</ul>
+<p>排除UDP包头损坏和校验问题，先查看接收缓冲区。使用5000用户时，丢包率开始在5%，使用2W用户时，丢包率在10-20%，调整接收缓冲区大小，步骤如下：</p>
+<pre><code>#打开文件
+ vi /etc/sysctl.conf
+
+#增加配置
+net.core.rmem_max = 26214400 # 设置为 25M
+net.core.wmem_max = 26214400 # 设置为 25M
+net.core.rmem_default = 26214400 # 设置为 25M
+net.core.wmem_default = 26214400 # 设置为 25M
+
+#生效
+sysctl -p 
+
+#调整服务端接收/发送缓冲区
+sysctl -w net.ipv4.udp_rmem_min=10485760 #10Mb
+sysctl -w net.ipv4.udp_wmem_min=10485760 #10Mb    </code></pre><p>同时修改了MTU，即最大传输单元，UDP在数据包过大时，会进行分包处理，导致数据无法发送或者接收是组合失败：</p>
+<pre><code>cat /sys/class/net/eth0/mtu
+#修改
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+#增加如下内容
+MTU=&quot;4000&quot;
+#保存后重启网卡生效
+service network restart
+#启用IPv6地址的，修改IPv6 mtu的参数为
+IPV6_MTU=&quot;1280&quot;</code></pre><p>即使修改了缓冲区大小和调整MTU大小，receive errors 仍然没有缓解，继续排查该问题。<br>另一个可以修改的参数netdev_max_backlog，表示linux内核从网卡驱动中读取报文后缓存数量，默认是1000，调大成5000：</p>
+<pre><code>#打开文件
+vi /etc/sysctl.conf
+
+#调大数量
+net.core.netdev_max_backlog=5000
+
+#生效
+sysctl -p </code></pre><p>经调整后，仍然后很大丢包率，这次使用dropwatch监控丢包的函数</p>
+<pre><code>#安装dropwatch
+yum install dropwatch
+
+#dropwatch初始化
+dropwatch -l kas    
+Initalizing kallsyms db
+dropwatch&gt; start
+Enabling monitoring...
+Kernel monitoring activated.
+Issue Ctrl-C to stop monitoring</code></pre><p>百度或google相应函数，可以定位网络报文丢弃时调用的函数，查找原因。</p>
+<h2 id="系统负载过高导致丢包"><a href="#系统负载过高导致丢包" class="headerlink" title="系统负载过高导致丢包"></a>系统负载过高导致丢包</h2><p>如果还没有效果，可以查看linux服务器的负载，系统 CPU、memory、IO 负载过高都有可能导致网络丢包。<br>升级系统配置或者优化应用程序。</p>
+
     </div>
     <!-- 文章末尾统一添加“本文结束”标记 -->
     <div>
@@ -346,30 +441,21 @@
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/MarkDown/" rel="tag"># MarkDown</a>
-            
-          </div>
-        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
+                <a href="/2019/08/14/hello-world/" rel="next" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/08/14/hello-world/" rel="prev" title="Hello World">
-                  Hello World <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -401,8 +487,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -480,6 +575,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LINUX系统UDP丢包问题分析和解决"><span class="nav-number">1.</span> <span class="nav-text">LINUX系统UDP丢包问题分析和解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络丢包"><span class="nav-number">1.1.</span> <span class="nav-text">网络丢包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网卡丢包"><span class="nav-number">1.2.</span> <span class="nav-text">网卡丢包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP协议丢包"><span class="nav-number">1.3.</span> <span class="nav-text">UDP协议丢包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统负载过高导致丢包"><span class="nav-number">1.4.</span> <span class="nav-text">系统负载过高导致丢包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>

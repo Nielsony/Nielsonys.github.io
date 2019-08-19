@@ -260,6 +260,96 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.nielsonyblog.com/2019/08/19/UDP丢包问题-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nielsony">
+      <meta itemprop="description" content="代码点缀星空">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nielsony博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+              <a href="/2019/08/19/UDP丢包问题-md/" class="post-title-link" itemprop="url">UDP丢包问题.md</a>
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-19 08:52:22 / 修改时间：16:55:10" itemprop="dateCreated datePublished" datetime="2019-08-19T08:52:22+08:00">2019-08-19</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="LINUX系统UDP丢包问题分析和解决"><a href="#LINUX系统UDP丢包问题分析和解决" class="headerlink" title="LINUX系统UDP丢包问题分析和解决"></a>LINUX系统UDP丢包问题分析和解决</h1><hr><br><p>由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。</p><h2 id="网络丢包"><a href="#网络丢包" class="headerlink" title="网络丢包"></a>网络丢包</h2><p>首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面，可以查看到2s/10s/40s的平均带宽使用，发现网络带宽没有达到瓶颈。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/19/UDP丢包问题-md/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+    <!-- 文章末尾统一添加“本文结束”标记 -->
+    <div>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.nielsonyblog.com/2019/08/14/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -472,7 +562,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
