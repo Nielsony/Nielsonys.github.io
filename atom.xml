@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.nielsonyblog.com/"/>
-  <updated>2019-08-14T05:53:27.098Z</updated>
+  <updated>2019-08-19T09:03:36.279Z</updated>
   <id>http://www.nielsonyblog.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>UDP丢包问题.md</title>
+    <link href="http://www.nielsonyblog.com/2019/08/19/LINUX%E7%B3%BB%E7%BB%9FUDP%E4%B8%A2%E5%8C%85%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3/"/>
+    <id>http://www.nielsonyblog.com/2019/08/19/LINUX系统UDP丢包问题分析和解决/</id>
+    <published>2019-08-19T00:52:22.000Z</published>
+    <updated>2019-08-19T09:03:36.279Z</updated>
+    
+    <summary type="html">
+    
+      &lt;br&gt;&lt;p&gt;由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。&lt;/p&gt;&lt;h2 id=&quot;网络丢包&quot;&gt;&lt;a href=&quot;#网络丢包&quot; class=&quot;headerlink&quot; title=&quot;网络丢包&quot;&gt;&lt;/a&gt;网络丢包&lt;/h2&gt;&lt;p&gt;首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面，可以查看到2s/10s/40s的平均带宽使用，发现网络带宽没有达到瓶颈。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="network" scheme="http://www.nielsonyblog.com/categories/network/"/>
+    
+    
+      <category term="linux" scheme="http://www.nielsonyblog.com/tags/linux/"/>
+    
+      <category term="udp" scheme="http://www.nielsonyblog.com/tags/udp/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
