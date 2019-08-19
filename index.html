@@ -276,7 +276,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/08/19/LINUX系统UDP丢包问题分析和解决/" class="post-title-link" itemprop="url">UDP丢包问题.md</a>
+              <a href="/2019/08/19/LINUX系统UDP丢包问题分析和解决/" class="post-title-link" itemprop="url">LINUX系统UDP丢包问题分析和解决</a>
             
           </h1>
         
@@ -292,7 +292,7 @@
                 
               
 
-              <time title="创建时间：2019-08-19 08:52:22 / 修改时间：17:03:36" itemprop="dateCreated datePublished" datetime="2019-08-19T08:52:22+08:00">2019-08-19</time>
+              <time title="创建时间：2019-08-19 08:52:22 / 修改时间：17:15:58" itemprop="dateCreated datePublished" datetime="2019-08-19T08:52:22+08:00">2019-08-19</time>
             </span>
           
             
@@ -324,7 +324,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <br><p>由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。</p><h2 id="网络丢包"><a href="#网络丢包" class="headerlink" title="网络丢包"></a>网络丢包</h2><p>首先检查网络带宽是否达到瓶颈，通过yum install iftop可以使用iftop工具，使用iftop命令，进入到网络带宽统计界面，可以查看到2s/10s/40s的平均带宽使用，发现网络带宽没有达到瓶颈。</p>
+          <p>最近的工作项目中使用UDP服务端提供高并发访问，压测时，4核CPU使用率25%左右，内存占用稳定不高，通过wireshark抓包，发现请求和返回都有丢失，怀疑是网卡丢包，借鉴了很多文章的解决办法，总结出这篇文章，供参考。</p><p>由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
