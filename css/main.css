@@ -1608,7 +1608,6 @@ pre .javascript .function {
   padding: 20px 10px;
   position: relative;
   text-align: center;
-  opacity: 1;
 }
 .site-overview-wrap {
   overflow: hidden;
@@ -1665,7 +1664,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8eff8f;
+  background: #5bed8c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2490,7 +2489,6 @@ ul.breadcrumb li+li:last-child {
   box-sizing: border-box;
   color: #555;
   width: 240px;
-  opacity: 0;
 }
 .sidebar-inner.affix {
   position: fixed;
