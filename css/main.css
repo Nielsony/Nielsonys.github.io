@@ -1631,24 +1631,24 @@ pre .javascript .function {
   display: inline-block;
 }
 .site-author-image {
-  border: 1px solid #eee;
   display: block;
-  height: auto;
   margin: 0 auto;
-  max-width: 120px;
   padding: 2px;
+  max-width: 120px;
+  height: auto;
+  border: 1px solid #eee;
 }
 .site-author-name {
-  color: #222;
-  font-weight: 600;
   margin: 0;
   text-align: center;
+  color: #222;
+  font-weight: 600;
 }
 .site-description {
-  color: #999;
-  font-size: 0.8125em;
   margin-top: 0;
   text-align: center;
+  font-size: 0.8125em;
+  color: #999;
 }
 .links-of-author {
   margin-top: 20px;
@@ -1664,7 +1664,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e42f90;
+  background: #ffdaff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
