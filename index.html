@@ -323,7 +323,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近的工作项目中使用UDP服务端提供高并发访问，压测时，4核CPU使用率25%左右，内存占用稳定不高，通过wireshark抓包，发现请求和返回都有丢失，怀疑是网卡丢包，借鉴了很多文章的解决办法，总结出这篇文章，供参考。</p><p>由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。</p>
+          <p>最近的工作项目中使用UDP服务端提供高并发访问，压测时，4核CPU使用率25%左右，内存占用稳定不高，通过wireshark抓包，发现请求和返回都有丢失，怀疑是网卡丢包，借鉴了很多文章的解决办法，总结出这篇文章，供参考。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -528,9 +528,7 @@
 <li>文本1</li>
 <li>文本2</li>
 <li>文本3</li>
-</ol><hr><h1 id="链接、图片和引用"><a href="#链接、图片和引用" class="headerlink" title="链接、图片和引用"></a>链接、图片和引用</h1><h2 id="这是一个超连接"><a href="#这是一个超连接" class="headerlink" title="这是一个超连接"></a>这是一个超连接</h2><p><a href="http://www.zhangblog.com/" target="_blank" rel="noopener">lightzhang 个人博客</a></p><h2 id="这是一个站外图片链接"><a href="#这是一个站外图片链接" class="headerlink" title="这是一个站外图片链接"></a>这是一个站外图片链接</h2><p><img src="https://www.cnblogs.com/images/logo_small.gif" alt="示例图"></p><h2 id="这是一个站内图片链接"><a href="#这是一个站内图片链接" class="headerlink" title="这是一个站内图片链接"></a>这是一个站内图片链接</h2><p><img src="/uploads/weixin_pulic_small.jpg" alt="数字网络"></p><h2 id="这个一个引用"><a href="#这个一个引用" class="headerlink" title="这个一个引用"></a>这个一个引用</h2><blockquote>
-<p>宠辱不惊，看庭前花开花落；去留无意，望天上云卷云舒</p>
-</blockquote><hr><h1 id="粗体和斜体"><a href="#粗体和斜体" class="headerlink" title="粗体和斜体"></a>粗体和斜体</h1><p>从最开始的 <em>wordpress</em> ,到 <em>tale</em> ,到现在的<strong>hexo</strong>,网站变得越来越简单,越来越轻量级,这里主要说说<strong>hexo</strong>的使用。</p>
+</ol>
           <!--noindex-->
           
             <div class="post-button text-center">

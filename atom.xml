@@ -25,7 +25,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;最近的工作项目中使用UDP服务端提供高并发访问，压测时，4核CPU使用率25%左右，内存占用稳定不高，通过wireshark抓包，发现请求和返回都有丢失，怀疑是网卡丢包，借鉴了很多文章的解决办法，总结出这篇文章，供参考。&lt;/p&gt;&lt;p&gt;由于使用的netty，所以先调整应用netty的参数配置，增加缓冲区大小到1M、10M，处理采用的业务线程池，连接池使用reuseport配置，增加到内核2倍的数量，发现丢包并无缓解，所以查看网卡和linux的系统参数。&lt;/p&gt;
+      &lt;p&gt;最近的工作项目中使用UDP服务端提供高并发访问，压测时，4核CPU使用率25%左右，内存占用稳定不高，通过wireshark抓包，发现请求和返回都有丢失，怀疑是网卡丢包，借鉴了很多文章的解决办法，总结出这篇文章，供参考。&lt;/p&gt;
     
     </summary>
     
@@ -71,9 +71,7 @@
 &lt;li&gt;文本1&lt;/li&gt;
 &lt;li&gt;文本2&lt;/li&gt;
 &lt;li&gt;文本3&lt;/li&gt;
-&lt;/ol&gt;&lt;hr&gt;&lt;h1 id=&quot;链接、图片和引用&quot;&gt;&lt;a href=&quot;#链接、图片和引用&quot; class=&quot;headerlink&quot; title=&quot;链接、图片和引用&quot;&gt;&lt;/a&gt;链接、图片和引用&lt;/h1&gt;&lt;h2 id=&quot;这是一个超连接&quot;&gt;&lt;a href=&quot;#这是一个超连接&quot; class=&quot;headerlink&quot; title=&quot;这是一个超连接&quot;&gt;&lt;/a&gt;这是一个超连接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.zhangblog.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;lightzhang 个人博客&lt;/a&gt;&lt;/p&gt;&lt;h2 id=&quot;这是一个站外图片链接&quot;&gt;&lt;a href=&quot;#这是一个站外图片链接&quot; class=&quot;headerlink&quot; title=&quot;这是一个站外图片链接&quot;&gt;&lt;/a&gt;这是一个站外图片链接&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://www.cnblogs.com/images/logo_small.gif&quot; alt=&quot;示例图&quot;&gt;&lt;/p&gt;&lt;h2 id=&quot;这是一个站内图片链接&quot;&gt;&lt;a href=&quot;#这是一个站内图片链接&quot; class=&quot;headerlink&quot; title=&quot;这是一个站内图片链接&quot;&gt;&lt;/a&gt;这是一个站内图片链接&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/uploads/weixin_pulic_small.jpg&quot; alt=&quot;数字网络&quot;&gt;&lt;/p&gt;&lt;h2 id=&quot;这个一个引用&quot;&gt;&lt;a href=&quot;#这个一个引用&quot; class=&quot;headerlink&quot; title=&quot;这个一个引用&quot;&gt;&lt;/a&gt;这个一个引用&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;宠辱不惊，看庭前花开花落；去留无意，望天上云卷云舒&lt;/p&gt;
-&lt;/blockquote&gt;&lt;hr&gt;&lt;h1 id=&quot;粗体和斜体&quot;&gt;&lt;a href=&quot;#粗体和斜体&quot; class=&quot;headerlink&quot; title=&quot;粗体和斜体&quot;&gt;&lt;/a&gt;粗体和斜体&lt;/h1&gt;&lt;p&gt;从最开始的 &lt;em&gt;wordpress&lt;/em&gt; ,到 &lt;em&gt;tale&lt;/em&gt; ,到现在的&lt;strong&gt;hexo&lt;/strong&gt;,网站变得越来越简单,越来越轻量级,这里主要说说&lt;strong&gt;hexo&lt;/strong&gt;的使用。&lt;/p&gt;
+&lt;/ol&gt;
     
     </summary>
     
